@@ -1,0 +1,102 @@
+---
+title: "Chapitre un : enregistrement et lecture de fichier"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r squelette_projet}
+
+dir.create("data")
+dir.create("img")
+dir.create("rapport")
+
+```
+  
+# Création et lecture d'un fichier csv  
+  
+```{r creation_csv}
+
+write.csv(
+  mtcars, 
+  "data/jdd_voiture.csv"
+  )
+
+```
+  
+```{r lecture_csv}
+
+jdd_voiture <- read.csv(
+  file = "data/jdd_voiture.csv",
+  row.names = "X"
+)
+
+```
+  
+```{r visulisation_resume}
+
+View(jdd_voiture)
+summary(jdd_voiture)
+
+```
+  
+  
+# Création et lecture d'un fichier excel  
+  
+```{r creation_excel}
+
+library(openxlsx)
+
+write.xlsx(
+  women, 
+  "data/jdd_femme.xlsx"
+  )
+
+```
+  
+```{r lire_excel}
+
+jdd_femme <- read.xlsx(
+  "data/jdd_femme.xlsx"
+)
+
+```
+  
+  
+# Lecture de données depuis un site internet  
+  
+```{r lecture_donnees_site_internet}
+
+library(rvest)
+page <- read_html("https://fr.m.wikisource.org/wiki/Lettres_de_la_comtesse_de_S%C3%A9gur/Texte_entier") %>% 
+  html_nodes("h1") %>% 
+  html_text()
+
+write(page, "data/titre_segur.txt")
+# ou
+page %>% 
+  write("data/titre_segur.txt")
+
+```
+  
+  
+  
+  
+# Création et lecture d'un fichier txt  
+  
+```{r creation_txt}
+
+titre_segur <- read.delim(
+  "data/titre_segur.txt", 
+  header = FALSE
+  )
+
+```
+  
+  
+
+  
+  
+  
